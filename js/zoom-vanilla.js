@@ -145,12 +145,16 @@
 
 			document.body.appendChild(targetImageWrap)
 			targetImageWrap.appendChild(targetImage)
+			// dynamic change z-index
+			targetImageWrap.style.zIndex = findMaximumZindex() + 1
 
 			targetImage.classList.add('zoom-img')
 			targetImage.setAttribute('data-action', 'zoom-out')
 
 			overlay = document.createElement('div')
 			overlay.className = 'zoom-overlay'
+			// dynamic change z-index
+			overlay.style.zIndex = findMaximumZindex()
 
 			document.body.appendChild(overlay)
 
@@ -244,6 +248,10 @@
 			overlay.parentNode.removeChild(overlay)
 
 			document.body.classList.remove('zoom-overlay-transitioning')
+		}
+		// find maximum z-index in document
+		function findMaximumZindex () {
+		return Math.max(1,...Array.from(document.querySelectorAll('*')).map(el => getComputedStyle(el).zIndex).filter(v => !isNaN(parseInt(v[1]))).map(o => parseInt(o)))
 		}
 
 		return function (target) {
