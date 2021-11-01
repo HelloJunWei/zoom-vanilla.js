@@ -251,7 +251,7 @@
 		}
 		// find maximum z-index in document
 		function findMaximumZindex () {
-		return Math.max(1,...Array.from(document.querySelectorAll('*')).map(el => getComputedStyle(el).zIndex).filter(v => !isNaN(parseInt(v[1]))).map(o => parseInt(o)))
+			return Math.max(1,...Array.from(document.querySelectorAll('*')).map(el => getComputedStyle(el).zIndex).filter(v => !isNaN(parseInt(v[1]))).map(o => parseInt(o)))
 		}
 
 		return function (target) {
